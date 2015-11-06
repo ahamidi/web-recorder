@@ -31,9 +31,12 @@ func main() {
 	}
 
 	reader, writer := io.Pipe()
-
 	p.Cmd.Stdout = writer
-	ff.Cmd.Stdin = reader
+
+	r2, w2 := io.Pipe()
+	ff.Cmd.Stdin = r2
+
+	go wr.Flow(reader, w2, 25)
 
 	var buff bytes.Buffer
 	p.Cmd.Stderr = &buff
