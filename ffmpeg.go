@@ -15,7 +15,7 @@ func NewFfmpeg(r *Recorder) (*Command, error) {
 		FfmpegPath = path
 	}
 
-	cmd := exec.Command(FfmpegPath, "-r", "10", "-y", "-c:v", "png", "-f", "image2pipe", "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "output.mp4")
+	cmd := exec.Command(FfmpegPath, "-r", "10", "-y", "-c:v", "png", "-f", "image2pipe", "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", r.OutputFile)
 
 	// Map various pipes
 	inPipe, err := cmd.StdinPipe()

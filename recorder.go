@@ -38,7 +38,7 @@ type Command struct {
 	Errout io.ReadCloser
 }
 
-func NewRecorder(targetURL string, duration int) (*Recorder, error) {
+func NewRecorder(targetURL string, duration int, output string) (*Recorder, error) {
 	log.Println("New Recorder created.")
 
 	u, err := url.Parse(targetURL)
@@ -50,11 +50,15 @@ func NewRecorder(targetURL string, duration int) (*Recorder, error) {
 		duration = 5
 	}
 
+	if output == "" {
+		output = "output.mp4"
+	}
+
 	r := &Recorder{
 		URL:        u,
 		Duration:   duration,
 		Framerate:  25,
-		OutputFile: "output.mp4",
+		OutputFile: output,
 	}
 
 	r.Recorder, err = NewPhantom(r)
