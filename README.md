@@ -10,5 +10,5 @@ _PhantomJS 2 can't currently be install using `brew`, so you'll need to install 
 
 #### TODO
 
-- [] Switch to Xvfb
+- [ ] Switch to Xvfb
 
