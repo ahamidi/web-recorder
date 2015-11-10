@@ -18,6 +18,11 @@ if (args.length === 1) {
       top: 0,
       left: 0
     };
+
+    // Play
+    page.evaluate(function(){
+      return document.getElementsByClassName('play-btn')[0].click();
+    })
     delay = 1000/fps;
     setInterval(function() {
       page.render('/dev/stdout', { format: "png", quality: "50" });

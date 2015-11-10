@@ -10,7 +10,7 @@ import (
 )
 
 var url = flag.String("url", "http://ahamidi.com", "URL to Record.")
-var duration = flag.Int("duration", 5, "Duration of recoding (in seconds).")
+var duration = flag.Int("duration", 5, "Duration of recording (in seconds).")
 
 func main() {
 	log.Println("Launching Recorder...")
@@ -36,7 +36,7 @@ func main() {
 	r2, w2 := io.Pipe()
 	ff.Cmd.Stdin = r2
 
-	go wr.Flow(reader, w2, 25)
+	go wr.Flow(reader, w2, 10)
 
 	var buff bytes.Buffer
 	p.Cmd.Stderr = &buff
