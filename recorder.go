@@ -74,20 +74,14 @@ func NewRecorder(targetURL string, duration int, output string) (*Recorder, erro
 }
 
 func (r *Recorder) Start() {
-	reader, writer := io.Pipe()
-	r.Recorder.Cmd.Stdout = writer
 
-	r2, w2 := io.Pipe()
-	r.Transcoder.Cmd.Stdin = r2
-
-	go Flow(reader, w2, 10)
+	go Flow(r.Recorder.Out, r.Transcoder.In, 10)
 
 	var buff bytes.Buffer
 	r.Recorder.Cmd.Stderr = &buff
 
 	r.Transcoder.Cmd.Start()
 	r.Recorder.Cmd.Run()
-	writer.Close()
 	r.Transcoder.Cmd.Wait()
 
 	if buff.Len() != 0 {

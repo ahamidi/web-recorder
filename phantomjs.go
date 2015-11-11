@@ -15,7 +15,7 @@ func NewPhantom(r *Recorder) (*Command, error) {
 		PhantomJSBinPath = path
 	}
 
-	cmd := exec.Command(PhantomJSBinPath, "capture_video.js", r.URL.String(), strconv.Itoa(r.Duration), r.OutputFile)
+	cmd := exec.Command(PhantomJSBinPath, "capture_video.js", r.URL.String(), strconv.Itoa(r.Duration))
 
 	// Map various pipes
 	inPipe, err := cmd.StdinPipe()
